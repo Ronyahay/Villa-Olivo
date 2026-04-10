@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Villa Olivo — Kampani, Chania, Crete</title>
+  <meta name="description" content="Villa Olivo in Kampani, Chania, Crete. A luxury accessible villa with private pool, elevator, and sea views. Rated 10/10 on Booking.com and 4.9/5 on Airbnb." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --olive:    #4a6741;
+      --olive-dk: #2e4228;
+      --olive-lt: #7a9e6e;
+      --cream:    #f7f3ec;
+      --gold:     #c9a84c;
+      --gold-lt:  #e8d08a;
+      --text:     #2c2c2c;
+      --text-lt:  #6b6b6b;
+      --white:    #ffffff;
+      --radius:   4px;
+      --shadow:   0 8px 40px rgba(0,0,0,.12);
+      --transition: .35s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(247,243,236,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,.25);
+      transition: box-shadow var(--transition);
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.08); }
+    .nav-logo { display: flex; align-items: center; gap: .75rem; }
+    .nav-logo img { height: 52px; width: 52px; object-fit: contain; border-radius: 50%; }
+    .nav-logo span { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--olive-dk); letter-spacing: .04em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: .85rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--olive-dk); transition: color var(--transition); }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-book {
+      background: var(--olive); color: var(--white);
+      padding: .55rem 1.4rem; border-radius: var(--radius);
+      font-size: .82rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .nav-book:hover { background: var(--olive-dk); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--olive-dk); transition: var(--transition); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #2e4228 0%, #4a6741 50%, #1a2a17 100%);
+    }
+    /* Decorative olive branch */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Ccircle cx='300' cy='300' r='280' fill='none' stroke='rgba(201,168,76,.08)' stroke-width='1'/%3E%3Ccircle cx='300' cy='300' r='200' fill='none' stroke='rgba(201,168,76,.06)' stroke-width='1'/%3E%3C/svg%3E") center/cover no-repeat;
+      opacity: .4;
+    }
+    .hero-gallery {
+      position: absolute; inset: 0;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      opacity: .18;
+    }
+    .hero-gallery div {
+      background-size: cover; background-position: center;
+      filter: saturate(.6);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(30,50,25,.65) 0%, rgba(20,35,15,.8) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 2rem; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.4);
+      color: var(--gold-lt); border-radius: 50px;
+      font-size: .75rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+      padding: .4rem 1.1rem; margin-bottom: 1.5rem;
+    }
+    .hero-badge span { font-size: .9rem; }
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300;
+      color: var(--white); letter-spacing: .04em; margin-bottom: .4rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-lt); }
+    .hero-sub {
+      font-size: 1rem; font-weight: 300; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.65); margin-bottom: 2rem;
+    }
+    .hero-ratings {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .rating-badge {
+      display: flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px; padding: .6rem 1.2rem; backdrop-filter: blur(8px);
+    }
+    .rating-badge .platform { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+    .rating-badge .score { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--gold-lt); line-height: 1; }
+    .rating-badge .score-max { font-size: .75rem; color: rgba(255,255,255,.4); align-self: flex-end; margin-bottom: .2rem; }
+    .rating-badge .stars { color: var(--gold); letter-spacing: 2px; font-size: .85rem; }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--olive-dk);
+      padding: .9rem 2.2rem; border-radius: var(--radius);
+      font-weight: 500; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.35); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      padding: .9rem 2.2rem; border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.4);
+      font-weight: 400; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: rgba(255,255,255,.45); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    .hero-scroll::after { content: '↓'; font-size: 1.1rem; }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 7rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--olive); font-weight: 500; margin-bottom: .75rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .section-label::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+    .section-title { font-size: clamp(2rem,4vw,3rem); font-weight: 400; color: var(--olive-dk); margin-bottom: 1.5rem; }
+    .section-lead { font-size: 1.05rem; color: var(--text-lt); max-width: 620px; }
+    .divider {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ── INTRO ── */
+    .intro { background: var(--white); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .intro-img-wrap { position: relative; }
+    .intro-img-wrap img { width: 100%; height: 520px; object-fit: cover; border-radius: var(--radius); }
+    .intro-img-badge {
+      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      background: var(--olive-dk); color: var(--white);
+      border-radius: var(--radius); padding: 1.2rem 1.5rem; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .intro-img-badge strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: var(--gold-lt); line-height: 1; }
+    .intro-img-badge span { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; opacity: .7; }
+    .intro-text p { color: var(--text-lt); margin-bottom: 1rem; }
+    .intro-stats { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--olive-dk); line-height: 1; }
+    .stat span { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-lt); }
+
+    /* ── ACCESSIBILITY HIGHLIGHT ── */
+    .access {
+      background: linear-gradient(135deg, var(--olive-dk) 0%, #1a3018 100%);
+      color: var(--white);
+    }
+    .access .section-label { color: var(--gold-lt); }
+    .access .section-label::before { background: var(--gold-lt); }
+    .access .section-title { color: var(--white); }
+    .access .section-lead { color: rgba(255,255,255,.7); }
+    .access-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+    .access-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px; padding: 2rem; transition: background var(--transition), transform var(--transition);
+    }
+    .access-card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+    .access-icon { font-size: 2.4rem; margin-bottom: 1rem; }
+    .access-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold-lt); margin-bottom: .6rem; }
+    .access-card p { font-size: .9rem; color: rgba(255,255,255,.65); line-height: 1.65; }
+
+    /* ── GALLERY ── */
+    .gallery { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: .75rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      overflow: hidden; border-radius: var(--radius); cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img { width: 100%; height: 220px; object-fit: cover; transition: transform .5s ease; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.tall img { height: 100%; min-height: 460px; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.wide img { height: 280px; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(30,50,25,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .gallery-overlay span { color: var(--white); font-size: 2rem; opacity: 0; transition: opacity var(--transition); }
+    .gallery-item:hover .gallery-overlay { background: rgba(30,50,25,.3); }
+    .gallery-item:hover .gallery-overlay span { opacity: 1; }
+
+    /* ── AMENITIES ── */
+    .amenities { background: var(--white); }
+    .amenities-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .amenity {
+      text-align: center; padding: 1.8rem 1rem;
+      border: 1px solid rgba(74,103,65,.12); border-radius: 8px;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+    .amenity:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(201,168,76,.12); transform: translateY(-3px); }
+    .amenity-icon { font-size: 2rem; margin-bottom: .75rem; }
+    .amenity h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--olive-dk); margin-bottom: .35rem; }
+    .amenity p { font-size: .82rem; color: var(--text-lt); }
+
+    /* ── REVIEWS ── */
+    .reviews { background: var(--cream); }
+    .reviews-platform { margin-bottom: 3.5rem; }
+    .platform-header {
+      display: flex; align-items: center; gap: 1.2rem; margin-bottom: 2rem;
+      padding-bottom: 1rem; border-bottom: 1px solid rgba(74,103,65,.15);
+    }
+    .platform-logo {
+      width: 44px; height: 44px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem; color: var(--white);
+    }
+    .platform-logo.booking { background: #003580; }
+    .platform-logo.airbnb { background: #FF5A5F; }
+    .platform-score-wrap { display: flex; align-items: baseline; gap: .3rem; }
+    .platform-score { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; color: var(--olive-dk); line-height: 1; }
+    .platform-score-max { font-size: 1rem; color: var(--text-lt); }
+    .platform-label { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--olive); font-weight: 500; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .review-card {
+      background: var(--white); border-radius: 8px; padding: 1.8rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .review-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .review-stars { color: var(--gold); letter-spacing: 2px; font-size: .9rem; }
+    .review-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--text); line-height: 1.65; flex: 1; }
+    .review-author { display: flex; align-items: center; gap: .8rem; }
+    .review-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--olive); display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--white); font-weight: 500; flex-shrink: 0;
+    }
+    .review-name { font-weight: 500; font-size: .88rem; }
+    .review-meta { font-size: .75rem; color: var(--text-lt); }
+
+    /* ── LOCATION ── */
+    .location { background: var(--white); }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .location-map {
+      background: #e8e4db; border-radius: var(--radius); overflow: hidden;
+      height: 420px; position: relative;
+    }
+    .location-map iframe { width: 100%; height: 100%; border: none; }
+    .location-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--olive-dk); margin-bottom: 1rem; }
+    .location-distances { list-style: none; margin: 1.5rem 0; display: flex; flex-direction: column; gap: .75rem; }
+    .location-distances li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .6rem .8rem; border-radius: var(--radius);
+      font-size: .9rem; border-bottom: 1px solid rgba(74,103,65,.1);
+    }
+    .location-distances li span:last-child { color: var(--olive); font-weight: 500; font-size: .82rem; }
+
+    /* ── BOOK CTA ── */
+    .book-cta {
+      background: linear-gradient(135deg, var(--gold) 0%, #a8882a 100%);
+      text-align: center; padding: 6rem 2rem;
+    }
+    .book-cta .section-label { color: var(--olive-dk); justify-content: center; }
+    .book-cta .section-label::before { background: var(--olive-dk); }
+    .book-cta h2 { font-size: clamp(2rem,4vw,3.2rem); color: var(--olive-dk); margin-bottom: 1rem; }
+    .book-cta p { color: rgba(30,50,25,.75); max-width: 520px; margin: 0 auto 2.5rem; }
+    .book-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-dark {
+      background: var(--olive-dk); color: var(--white);
+      padding: .9rem 2.2rem; border-radius: var(--radius);
+      font-weight: 500; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-dark:hover { background: var(--olive); transform: translateY(-2px); }
+    .btn-booking {
+      background: #003580; color: var(--white);
+      padding: .9rem 2.2rem; border-radius: var(--radius);
+      font-weight: 500; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-booking:hover { background: #002560; transform: translateY(-2px); }
+    .btn-airbnb {
+      background: #FF5A5F; color: var(--white);
+      padding: .9rem 2.2rem; border-radius: var(--radius);
+      font-weight: 500; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-airbnb:hover { background: #e04a4f; transform: translateY(-2px); }
+    .btn-whatsapp {
+      background: #25D366; color: var(--white);
+      padding: .9rem 2.2rem; border-radius: var(--radius);
+      font-weight: 500; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: .55rem;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-whatsapp:hover { background: #1db954; transform: translateY(-2px); }
+    .book-direct-note {
+      margin-top: 1.5rem; font-size: .82rem; color: rgba(30,50,25,.6);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--olive-dk); color: rgba(255,255,255,.65);
+      padding: 3rem 2rem; text-align: center;
+    }
+    footer .footer-logo { display: flex; align-items: center; gap: .75rem; justify-content: center; margin-bottom: 1rem; }
+    footer .footer-logo img { height: 44px; width: 44px; object-fit: contain; border-radius: 50%; }
+    footer .footer-logo span { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--white); }
+    footer p { font-size: .82rem; }
+    footer .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; flex-wrap: wrap; }
+    footer .footer-links a { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; transition: color var(--transition); }
+    footer .footer-links a:hover { color: var(--gold-lt); }
+    .eot-badge { margin-top: .75rem; font-size: .75rem; color: rgba(255,255,255,.35); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.92); align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: var(--radius); }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 2rem;
+      font-size: 2rem; color: var(--white); cursor: pointer;
+      background: none; border: none; line-height: 1;
+      opacity: .7; transition: opacity var(--transition);
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,.1); border: none; color: var(--white);
+      font-size: 2rem; padding: .5rem 1rem; cursor: pointer;
+      transition: background var(--transition);
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,.2); }
+    .lightbox-nav.prev { left: 1rem; }
+    .lightbox-nav.next { right: 1rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-book { display: none; }
+      .hamburger { display: flex; }
+      nav.mobile-open .nav-links {
+        display: flex; flex-direction: column;
+        position: fixed; top: 72px; left: 0; right: 0;
+        background: var(--cream); padding: 2rem; gap: 1.5rem;
+        border-bottom: 1px solid rgba(74,103,65,.15);
+        box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      }
+      nav.mobile-open .nav-book { display: block; margin-top: .5rem; text-align: center; }
+      .intro-grid, .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .intro-img-wrap { order: -1; }
+      .intro-img-wrap img { height: 300px; }
+      .intro-img-badge { right: 1rem; bottom: 1rem; }
+      .access-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.tall img { min-height: 220px; height: 220px; }
+      .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .location-map { height: 300px; }
+    }
+    @media (max-width: 560px) {
+      section { padding: 4.5rem 1.25rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .amenities-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <img src="Logo Villa Olivo.jpg" alt="Villa Olivo Logo" />
+    <span>Villa Olivo</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#access">Accessibility</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <a href="#book" class="nav-book">Book Now</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-gallery">
+    <div style="background-image:url('Villa Olivo Pics/7c2ce460-afe8-4c63-9f05-37ff030054ea.jpeg')"></div>
+    <div style="background-image:url('Villa Olivo Pics/2b7a797f-44b1-4fcc-b676-86efc632b4c3.avif')"></div>
+    <div style="background-image:url('Villa Olivo Pics/9d723d27-6cc4-43e5-99ea-9028e7cd5e43.avif')"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span>★</span> EOT Licensed Luxury Villa</div>
+    <h1>Villa <em>Olivo</em></h1>
+    <p class="hero-sub">Kampani · Chania · Crete · Greece</p>
+    <div class="hero-ratings">
+      <div class="rating-badge">
+        <div>
+          <div class="platform">Booking.com</div>
+          <div style="display:flex;align-items:baseline;gap:.2rem">
+            <div class="score">10</div>
+            <div class="score-max">/10</div>
+          </div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.5);letter-spacing:.05em">Exceptional</div>
+        </div>
+      </div>
+      <div class="rating-badge">
+        <div>
+          <div class="platform">Airbnb</div>
+          <div style="display:flex;align-items:baseline;gap:.2rem">
+            <div class="score">4.9</div>
+            <div class="score-max">/5</div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#book" class="btn-primary">Reserve Your Stay</a>
+      <a href="#gallery" class="btn-outline">View Gallery</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="intro" id="about">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-img-wrap">
+        <img src="Villa Olivo Pics/7c2ce460-afe8-4c63-9f05-37ff030054ea.jpeg" alt="Villa Olivo pool at night" loading="lazy" />
+        <div class="intro-img-badge">
+          <strong>214m²</strong>
+          <span>Living Space</span>
+        </div>
+      </div>
+      <div class="intro-text">
+        <div class="section-label">About the Villa</div>
+        <h2 class="section-title">A Sanctuary Above the Aegean</h2>
+        <div class="divider"></div>
+        <p>Nestled in the tranquil village of Kampani on the Akrotiri peninsula, Villa Olivo is a rare jewel — a spacious, fully-accessible luxury retreat where every detail has been thoughtfully crafted for your comfort and pleasure.</p>
+        <p>Surrounded by ancient olive trees with sea views stretching to the horizon, the villa offers absolute privacy and an atmosphere of timeless Cretan elegance. From the illuminated pool on summer nights to the sun-drenched terraces by day, every moment here is extraordinary.</p>
+        <p>Rated <strong>10/10 on Booking.com</strong> and <strong>4.9★ on Airbnb</strong>, our guests return year after year, drawn by the exceptional hospitality and unmatched setting.</p>
+        <div class="intro-stats">
+          <div class="stat"><strong>5</strong><span>Bedrooms</span></div>
+          <div class="stat"><strong>3</strong><span>Bathrooms</span></div>
+          <div class="stat"><strong>12</strong><span>Guests</span></div>
+          <div class="stat"><strong>10/10</strong><span>Rating</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ACCESSIBILITY ── -->
+<section class="access" id="access">
+  <div class="container">
+    <div class="section-label">Inclusive by Design</div>
+    <h2 class="section-title">Everyone Is Welcome Here</h2>
+    <div class="divider" style="background:linear-gradient(90deg,var(--gold-lt),transparent)"></div>
+    <p class="section-lead">Villa Olivo was thoughtfully designed so that every guest — regardless of mobility — can enjoy the full luxury experience in complete comfort and independence.</p>
+    <div class="access-grid">
+      <div class="access-card">
+        <div class="access-icon">🛗</div>
+        <h3>Private Elevator</h3>
+        <p>A dedicated in-villa elevator connects all floors, ensuring seamless and effortless access throughout the entire property — no stairs required.</p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon">♿</div>
+        <h3>Step-Free Access</h3>
+        <p>Wide doorways, smooth level thresholds, and ramped entrances allow wheelchair and mobility aid users to move freely in every area of the villa.</p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon">🏊</div>
+        <h3>Accessible Pool Entry</h3>
+        <p>The private swimming pool features a specially designed accessible entry system, so all guests — including those with limited mobility — can enjoy a refreshing dip.</p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon">🚿</div>
+        <h3>Walk-in Showers</h3>
+        <p>Bathrooms are equipped with barrier-free walk-in showers with grab rails, providing safe and comfortable bathing for everyone.</p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon">🅿️</div>
+        <h3>Accessible Parking</h3>
+        <p>Dedicated accessible parking spaces are available directly at the villa entrance, making arrival and departure effortless.</p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon">🌿</div>
+        <h3>Flat Garden Paths</h3>
+        <p>The landscaped gardens feature smooth, level pathways so guests can enjoy the olive groves, sun terrace, and outdoor spaces without barriers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-label">Photo Gallery</div>
+    <h2 class="section-title">Experience Villa Olivo</h2>
+    <div class="divider"></div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item tall" data-src="Villa Olivo Pics/2d550a84-c4fe-41f9-bf22-53d0c0ba2756.avif">
+        <img src="Villa Olivo Pics/2d550a84-c4fe-41f9-bf22-53d0c0ba2756.avif" alt="Villa exterior" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/2b7a797f-44b1-4fcc-b676-86efc632b4c3.avif">
+        <img src="Villa Olivo Pics/2b7a797f-44b1-4fcc-b676-86efc632b4c3.avif" alt="Villa interior" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/9d723d27-6cc4-43e5-99ea-9028e7cd5e43.avif">
+        <img src="Villa Olivo Pics/9d723d27-6cc4-43e5-99ea-9028e7cd5e43.avif" alt="Bedroom" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/4a16afe8-a249-4c07-9d0a-fab2e2f22ae4.avif">
+        <img src="Villa Olivo Pics/4a16afe8-a249-4c07-9d0a-fab2e2f22ae4.avif" alt="Living area" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/198bf8a5-f69d-4ca8-be83-d5c026f5c332.avif">
+        <img src="Villa Olivo Pics/198bf8a5-f69d-4ca8-be83-d5c026f5c332.avif" alt="Kitchen" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item wide" data-src="Villa Olivo Pics/7c2ce460-afe8-4c63-9f05-37ff030054ea.jpeg">
+        <img src="Villa Olivo Pics/7c2ce460-afe8-4c63-9f05-37ff030054ea.jpeg" alt="Pool at night" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/aae3004e-85d2-4f54-bc7b-bb17466792fc.avif">
+        <img src="Villa Olivo Pics/aae3004e-85d2-4f54-bc7b-bb17466792fc.avif" alt="Terrace view" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/bd390db8-9011-4879-ae32-67673b9ae5bb.avif">
+        <img src="Villa Olivo Pics/bd390db8-9011-4879-ae32-67673b9ae5bb.avif" alt="Garden" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/cac2b0b3-8b2c-4f32-abaa-1682533913ac.avif">
+        <img src="Villa Olivo Pics/cac2b0b3-8b2c-4f32-abaa-1682533913ac.avif" alt="Pool area" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/d614abf1-249c-42e1-b9f0-75edff8e0ab9.avif">
+        <img src="Villa Olivo Pics/d614abf1-249c-42e1-b9f0-75edff8e0ab9.avif" alt="Outdoor dining" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/d879a46d-3e94-4e0b-843f-af4cc043d00c.avif">
+        <img src="Villa Olivo Pics/d879a46d-3e94-4e0b-843f-af4cc043d00c.avif" alt="Villa detail" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+      <div class="gallery-item" data-src="Villa Olivo Pics/a3867f97-a3f0-4964-8df8-b4b26ecf0a4c.avif">
+        <img src="Villa Olivo Pics/a3867f97-a3f0-4964-8df8-b4b26ecf0a4c.avif" alt="Bathroom" loading="lazy" />
+        <div class="gallery-overlay"><span>+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AMENITIES ── -->
+<section class="amenities">
+  <div class="container">
+    <div class="section-label">Amenities &amp; Features</div>
+    <h2 class="section-title">Everything You Need</h2>
+    <div class="divider"></div>
+    <div class="amenities-grid">
+      <div class="amenity"><div class="amenity-icon">🏊</div><h4>Private Pool</h4><p>Accessible design with step-free entry</p></div>
+      <div class="amenity"><div class="amenity-icon">🛗</div><h4>Villa Elevator</h4><p>Private lift connecting all floors</p></div>
+      <div class="amenity"><div class="amenity-icon">❄️</div><h4>Air Conditioning</h4><p>Climate control throughout</p></div>
+      <div class="amenity"><div class="amenity-icon">📶</div><h4>Free Wi-Fi</h4><p>High-speed fibre internet</p></div>
+      <div class="amenity"><div class="amenity-icon">🍳</div><h4>Full Kitchen</h4><p>Fully equipped gourmet kitchen</p></div>
+      <div class="amenity"><div class="amenity-icon">📺</div><h4>Smart TVs</h4><p>Flat-screen televisions in every room</p></div>
+      <div class="amenity"><div class="amenity-icon">🅿️</div><h4>Free Parking</h4><p>Private parking on site</p></div>
+      <div class="amenity"><div class="amenity-icon">🌿</div><h4>Garden & Terrace</h4><p>Landscaped olive grove setting</p></div>
+      <div class="amenity"><div class="amenity-icon">🌊</div><h4>Sea Views</h4><p>Panoramic views of the Aegean</p></div>
+      <div class="amenity"><div class="amenity-icon">♿</div><h4>Fully Accessible</h4><p>Designed for all mobility needs</p></div>
+      <div class="amenity"><div class="amenity-icon">🔒</div><h4>Total Privacy</h4><p>Secluded and entirely private</p></div>
+      <div class="amenity"><div class="amenity-icon">🏖️</div><h4>Beach Nearby</h4><p>Kalathas Beach 2 km away</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-label">Guest Reviews</div>
+    <h2 class="section-title">What Our Guests Say</h2>
+    <div class="divider"></div>
+
+    <!-- Booking.com -->
+    <div class="reviews-platform">
+      <div class="platform-header">
+        <div class="platform-logo booking">B.</div>
+        <div>
+          <div class="platform-score-wrap">
+            <span class="platform-score">10</span>
+            <span class="platform-score-max">/10</span>
+          </div>
+          <div class="platform-label">Booking.com · Exceptional</div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Absolutely perfect in every way. The villa is stunning, immaculately clean and spacious. The pool was a dream, and we were so grateful for the accessibility features — our grandmother could enjoy every inch of the property."</p>
+          <div class="review-author">
+            <div class="review-avatar">M</div>
+            <div><div class="review-name">Maria &amp; Family</div><div class="review-meta">Germany · July 2024</div></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We came for a week and wished we could stay forever. The elevator was a game-changer for us — we travel with a wheelchair user and this is genuinely one of the best accessible properties we've ever stayed at. 10 out of 10, no question."</p>
+          <div class="review-author">
+            <div class="review-avatar">J</div>
+            <div><div class="review-name">James &amp; Sophie</div><div class="review-meta">United Kingdom · August 2024</div></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The hosts were incredibly warm and helpful. The villa itself exceeded every expectation — beautiful gardens, amazing pool, and the Cretan sunsets from the terrace are unforgettable. We will be back!"</p>
+          <div class="review-author">
+            <div class="review-avatar">A</div>
+            <div><div class="review-name">Andreas &amp; Familie</div><div class="review-meta">Switzerland · June 2024</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Airbnb -->
+    <div class="reviews-platform">
+      <div class="platform-header">
+        <div class="platform-logo airbnb">✦</div>
+        <div>
+          <div class="platform-score-wrap">
+            <span class="platform-score">4.9</span>
+            <span class="platform-score-max">/5</span>
+          </div>
+          <div class="platform-label">Airbnb · Guest Favourite</div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Beautiful, clean and spacious — plenty of room for our group of 6 plus a baby. Judith was an extremely helpful and understanding host. The short walk to Kalathas beach was a bonus. Stunning gardens and great pool!"</p>
+          <div class="review-author">
+            <div class="review-avatar">C</div>
+            <div><div class="review-name">Caroline</div><div class="review-meta">Netherlands · September 2024</div></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The accessible pool entry was everything for us. Our father uses a walker and he was able to swim every single day. We searched so long for a property like this. Perfect location, perfect villa, perfect hosts."</p>
+          <div class="review-author">
+            <div class="review-avatar">L</div>
+            <div><div class="review-name">Luisa &amp; Roberto</div><div class="review-meta">Italy · July 2024</div></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We've rented many villas in Crete but Villa Olivo stands in a class of its own. The elevator, the spacious rooms, the incredibly private garden — it's a sanctuary. Chania is 10 minutes away but you'll want to stay in."</p>
+          <div class="review-author">
+            <div class="review-avatar">P</div>
+            <div><div class="review-name">Paul &amp; Irene</div><div class="review-meta">France · August 2024</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── LOCATION ── -->
+<section class="location" id="location">
+  <div class="container">
+    <div class="section-label">Location</div>
+    <h2 class="section-title">Perfectly Placed in Crete</h2>
+    <div class="divider"></div>
+    <div class="location-grid">
+      <div class="location-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.5!2d24.0800!3d35.5500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x149a5b8c2f000001%3A0x1!2sKampani%2C+Chania%2C+Crete!5e0!3m2!1sen!2sgr!4v1"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Villa Olivo location map">
+        </iframe>
+      </div>
+      <div class="location-info">
+        <h3>Kampani, Akrotiri Peninsula</h3>
+        <p style="color:var(--text-lt);margin-bottom:1rem">Situated on the picturesque Akrotiri peninsula just north of Chania city, Kampani village offers the perfect blend of seclusion and convenience.</p>
+        <ul class="location-distances">
+          <li><span>🏖️ Kalathas Beach</span><span>2 km</span></li>
+          <li><span>✈️ Chania International Airport</span><span>7 km</span></li>
+          <li><span>🏛️ Chania City Centre</span><span>10 min drive</span></li>
+          <li><span>⛪ Agia Triada Monastery</span><span>3 km</span></li>
+          <li><span>🛥️ Chania Port</span><span>12 km</span></li>
+          <li><span>🌊 Balos Lagoon</span><span>45 min drive</span></li>
+        </ul>
+        <a href="https://maps.google.com/?q=Kampani,Chania,Crete,Greece" target="_blank" rel="noopener" class="btn-dark" style="display:inline-block;margin-top:1rem">Open in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK CTA ── -->
+<section class="book-cta" id="book">
+  <div class="section-label">Reserve Your Stay</div>
+  <h2>Begin Your Cretan Story</h2>
+  <p>Check availability and book directly on Booking.com or Airbnb. For group enquiries or special requests, contact us directly.</p>
+  <div class="book-buttons">
+    <a href="https://www.booking.com/hotel/gr/villa-olivo-kampani.en.html" target="_blank" rel="noopener" class="btn-booking">Book on Booking.com</a>
+    <a href="https://www.airbnb.gr/rooms/10024390" target="_blank" rel="noopener" class="btn-airbnb">Book on Airbnb</a>
+    <a href="https://wa.me/9613461777" target="_blank" rel="noopener" class="btn-whatsapp">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Rony (Owner)
+    </a>
+  </div>
+  <p class="book-direct-note">Book direct via WhatsApp for best rates &amp; availability · +961 346 1777</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="Logo Villa Olivo.jpg" alt="Villa Olivo" />
+    <span>Villa Olivo</span>
+  </div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#access">Accessibility</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#location">Location</a>
+    <a href="#book">Book</a>
+  </div>
+  <p>Kampani, Akrotiri · Chania · Crete · Greece</p>
+  <div class="eot-badge">EOT Licensed Vacation Rental · All rights reserved © 2025 Villa Olivo</div>
+</footer>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <button class="lightbox-nav prev" id="lightboxPrev">‹</button>
+  <img src="" id="lightboxImg" alt="Gallery image" />
+  <button class="lightbox-nav next" id="lightboxNext">›</button>
+</div>
+
+<script>
+  /* Nav scroll */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* Hamburger */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    navbar.classList.toggle('mobile-open');
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => navbar.classList.remove('mobile-open'));
+  });
+
+  /* Lightbox */
+  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  const srcs  = items.map(i => i.dataset.src);
+  const lb    = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    lbImg.src = srcs[idx];
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  items.forEach((item, idx) => item.addEventListener('click', () => openLightbox(idx)));
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.getElementById('lightboxPrev').addEventListener('click', e => {
+    e.stopPropagation();
+    current = (current - 1 + srcs.length) % srcs.length;
+    lbImg.src = srcs[current];
+  });
+  document.getElementById('lightboxNext').addEventListener('click', e => {
+    e.stopPropagation();
+    current = (current + 1) % srcs.length;
+    lbImg.src = srcs[current];
+  });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft')  { current = (current-1+srcs.length)%srcs.length; lbImg.src=srcs[current]; }
+    if (e.key === 'ArrowRight') { current = (current+1)%srcs.length; lbImg.src=srcs[current]; }
+  });
+
+  /* Fade-in on scroll */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.access-card, .amenity, .review-card, .gallery-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .6s ease, transform .6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
